@@ -1,0 +1,37 @@
+.jumbotron {
+    text-align: center;
+    background-image: url("../images/main-image.jpg");
+    width: 100%;
+}
+
+.display-4 {
+    color: white;
+    font-size: 60px;
+    font-weight: 800;
+}
+
+.lead {
+    color: white;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.main {
+    background: lightgrey;
+    width: 50%;
+}
+
+.card {
+    margin-bottom: 2%;
+}
+
+.btn {
+    background-color: #016b3a;
+    color: white;
+}
+
+/* .jumbotron {
+    text-align: center;
+    background-image: url("../images/TrainTrackingHeader.jpg");
+    height: 300px;
+} */
