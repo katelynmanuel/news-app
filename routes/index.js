@@ -36,23 +36,42 @@ router.get("/scrape", function(req, res) {
             db.Article.create(result)
             .then(function(dbArticle) {
                 // View the added result in the console
-                console.log(dbArticle);
+                // console.log(dbArticle);
             })
             // Throw error
             .catch(function(err) {
                 return res.json(err);
             });
         });
-      res.send("Scrape Complete");
       res.redirect("articles");
     });
 });
 
 // Route for getting all Articles from the db
-router.get("/articles", function(req, res) {
+router.get("/savedArticles", function(req, res) {
     // Grab every document in the Articles collection
+
     db.Article.find({})
         .then(function(dbArticle) {
+           
+        // If we were able to successfully find Articles, send them back to the client
+        res.render("savedArticles", {data: dbArticle});
+        })
+        .catch(function(err) {
+        // If an error occurred, send it to the client
+        res.json(err);
+    });
+});
+
+
+
+// Route for getting all Articles from the db
+router.get("/articles", function(req, res) {
+    // Grab every document in the Articles collection
+
+    db.Article.find({})
+        .then(function(dbArticle) {
+           
         // If we were able to successfully find Articles, send them back to the client
         res.render("index", {data: dbArticle});
         })
@@ -60,6 +79,13 @@ router.get("/articles", function(req, res) {
         // If an error occurred, send it to the client
         res.json(err);
     });
+});
+
+router.put("/articles/:id", function(req, res) {
+    db.Article.findOneAndUpdate({ _id: req.params.id }, { saved: true })
+    .then(function(dbArticleSaved) {
+        console.log("Saved Article: ", dbArticleSaved);
+    })
 });
 
 // Route for grabbing a specific Article by id, populate it with it's note
@@ -90,7 +116,7 @@ router.post("/articles/:id", function(req, res) {
         })
         .then(function(dbArticle) {
         // If we were able to successfully update an Article, send it back to the client
-        res.json(dbArticle);
+        res.redirect("/articles/" + req.params.id);
         })
         .catch(function(err) {
         // If an error occurred, send it to the client

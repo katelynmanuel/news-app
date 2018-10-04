@@ -14,7 +14,7 @@
             <a class="nav-link" id="home" href="#">Home</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" id="savedBtn" href="/savedArticles">Saved Articles</a>
+            <a class="nav-link" id="savedBtn" href="#">Saved Articles</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="#">Clear Articles</a>
@@ -33,6 +33,7 @@
 
     <div class="row">
         {{#each data}}
+        {{#if saved}}
         <div class="card">
             <div class="card-header">{{title}}</div>
             <div class="card-body">
@@ -42,6 +43,7 @@
                 <button type="button" class="btn saveArticle" id={{_id}}>Save Article</button>
             </div>
         </div>
+        {{/if}}
         {{/each}}
     </div>
 

@@ -1,5 +1,3 @@
-scrapeArticles();
-
 // Load saved articles
 function loadArticles(saved) {
     let route = '/articles';
@@ -16,7 +14,7 @@ function scrapeArticles() {
 };
 
 // Saved Articles event handler
-$(document).on("click", "#savedArticles", function () {
+$(document).on("click", "#home", function () {
     loadArticles(true);
 });
 
@@ -26,10 +24,11 @@ $(document).on("click", "#home", function () {
 });
 
 // Article Save event handler
-$(document).on("click", "#saveArticle", function () {
-    const articleId = $(this).data("id")
+$(document).on("click", ".saveArticle", function () {
+    const articleId = $(this).attr("id")
+    console.log("Saved Article: " + articleId);
     $.ajax({
-        method: "PATCH",
+        method: "PUT",
         url: "/articles/" + articleId,
         data: { saved: true }
     }).then(data => {
